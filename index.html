@@ -21,9 +21,16 @@
 <h1>NetConfig SLM — Data Generation Log</h1>
 <p class="sub">Building a purpose-built small model for network configuration, in public. This page is the public snapshot of the project's live run log, refreshed after every run.</p>
 
-<h2>Latest run</h2>
+<h2>Runs</h2>
 <table>
   <tr><th>Date</th><th>Run</th><th>Examples</th><th>Parse (ciscoconfparse2)</th><th>Batfish</th></tr>
+  <tr>
+    <td>2026-11-22</td>
+    <td>Seed expansion — seed set grown from 5 to 100 hand-written examples across the 6 locked v0 families (17 each for VLAN/L2, trunk/SVI, static routing, OSPF, BGP; 15 interface/mgmt)</td>
+    <td>100</td>
+    <td class="pass">100 / 100 pass</td>
+    <td class="pass">100 / 100 pass (CISCO_IOS, 0 init issues)</td>
+  </tr>
   <tr>
     <td>2026-11-22</td>
     <td>Seed validation — first end-to-end run of the validation ladder (Batfish in Docker, reached over Tailscale)</td>
@@ -36,8 +43,10 @@
 <h2>Totals</h2>
 <table>
   <tr><th>Validated examples</th><th>v0 target</th><th>Families</th></tr>
-  <tr><td>5</td><td>~5,000 pairs</td><td>VLAN/L2 · trunk/SVI · static routing · OSPF · BGP · interface/mgmt</td></tr>
+  <tr><td>100</td><td>~5,000 pairs</td><td>VLAN/L2 · trunk/SVI · static routing · OSPF · BGP · interface/mgmt</td></tr>
 </table>
+
+<p class="note">Status: v0 scope locked on 2026-11-22 (6 families, ~5,000 validated pairs, Qwen3-4B fine-tune first). Next: family-by-family data generation toward the first ~500-pair batch.</p>
 
 <p class="note">Every dataset example must pass two rungs before it counts: a syntax parse, then Batfish semantic validation. Background: <a href="https://avinashgosavi.com/post/building-a-purpose-built-small-model-the-prework/">Building a purpose-built small model: the prework</a>.</p>
 </body>
