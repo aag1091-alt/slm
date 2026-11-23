@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NetConfig SLM — Data Generation Log</title>
+<meta name="description" content="Public log of data generation and validation runs for NetConfig SLM, a purpose-built small model for network configuration.">
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 760px; margin: 2.5rem auto; padding: 0 1.2rem; line-height: 1.55; }
+  h1 { font-size: 1.7rem; margin-bottom: .2rem; }
+  .sub { opacity: .75; margin-top: 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1.2rem 0; font-size: .95rem; }
+  th, td { border-bottom: 1px solid #8886; padding: .45rem .5rem; text-align: left; }
+  .pass { font-weight: bold; }
+  .note { font-size: .92rem; opacity: .85; }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: .9em; }
+</style>
+</head>
+<body>
+<h1>NetConfig SLM — Data Generation Log</h1>
+<p class="sub">Building a purpose-built small model for network configuration, in public. This page is the public snapshot of the project's live run log, refreshed after every run.</p>
+
+<h2>Latest run</h2>
+<table>
+  <tr><th>Date</th><th>Run</th><th>Examples</th><th>Parse (ciscoconfparse2)</th><th>Batfish</th></tr>
+  <tr>
+    <td>2026-11-22</td>
+    <td>Seed validation — first end-to-end run of the validation ladder (Batfish in Docker, reached over Tailscale)</td>
+    <td>5</td>
+    <td class="pass">5 / 5 pass</td>
+    <td class="pass">5 / 5 pass (CISCO_IOS, 0 init issues)</td>
+  </tr>
+</table>
+
+<h2>Totals</h2>
+<table>
+  <tr><th>Validated examples</th><th>v0 target</th><th>Families</th></tr>
+  <tr><td>5</td><td>~5,000 pairs</td><td>VLAN/L2 · trunk/SVI · static routing · OSPF · BGP · interface/mgmt</td></tr>
+</table>
+
+<p class="note">Every dataset example must pass two rungs before it counts: a syntax parse, then Batfish semantic validation. Background: <a href="https://avinashgosavi.com/post/building-a-purpose-built-small-model-the-prework/">Building a purpose-built small model: the prework</a>.</p>
+</body>
+</html>
