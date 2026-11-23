@@ -26,6 +26,20 @@
   <tr><th>Date</th><th>Run</th><th>Examples</th><th>Parse (ciscoconfparse2)</th><th>Batfish</th></tr>
   <tr>
     <td>2026-11-23</td>
+    <td>Dataset v1.0 assembled + published — the complete Cisco v0 dataset: 5,000 pairs (v0.4 corpus + batch 7), fulfilling the scope locked on 2026-11-22 (6 families, ~5,000 validated pairs) at exactly 5,000; stratified splits train 4,496 / val 252 / test 252; integrity clean (unique IDs, no duplicate pairs, secret scrub clean); full-corpus intent-match audit triaged — all 242 flagged rows are documented checker extraction limits, independently re-verified pair-by-pair (1,922 VLAN port pairs + 179 trunks), zero real mismatches</td>
+    <td>5,000</td>
+    <td class="pass">5,000 / 5,000 pass</td>
+    <td class="pass">5,000 / 5,000 pass (CISCO_IOS, 0 init issues)</td>
+  </tr>
+  <tr>
+    <td>2026-11-23</td>
+    <td>Batch 7 generation — 1,720 new pairs (287 per family, 285 interface/mgmt), the final Cisco wave; interface_mgmt shape space widened with four new block combinations (routed-port + console, mixed SSH, ports + banner, loopback + banner) combining previously probe-passed blocks, no new CLI constructs; generator intent-match gate mutation-tested (22/22 planted errors caught), dedupe rejected 20 candidates</td>
+    <td>1,720</td>
+    <td class="pass">1,720 / 1,720 pass</td>
+    <td class="pass">1,720 / 1,720 pass (CISCO_IOS, 0 init issues)</td>
+  </tr>
+  <tr>
+    <td>2026-11-23</td>
     <td>Dataset v0.4 assembled + published — 3,280 pairs (v0.3 corpus + batch 6), stratified splits train 2,956 / val 162 / test 162; integrity clean (unique IDs, no duplicate pairs, secret scrub clean); full-corpus intent-match audit triaged — all 126 flagged rows are documented checker extraction limits, independently re-verified pair-by-pair (1,062 VLAN port pairs + 78 trunks), zero real mismatches</td>
     <td>3,280</td>
     <td class="pass">3,280 / 3,280 pass</td>
@@ -113,10 +127,10 @@
 <h2>Totals</h2>
 <table>
   <tr><th>Validated examples</th><th>v0 target</th><th>Families</th></tr>
-  <tr><td>3,280</td><td>~5,000 pairs</td><td>VLAN/L2 · trunk/SVI · static routing · OSPF · BGP · interface/mgmt</td></tr>
+  <tr><td>5,000</td><td>~5,000 pairs — reached (v1.0 complete)</td><td>VLAN/L2 · trunk/SVI · static routing · OSPF · BGP · interface/mgmt</td></tr>
 </table>
 
-<p class="note">Status: v0 scope locked on 2026-11-22 (6 families, ~5,000 validated pairs, Qwen3-4B fine-tune first). <strong>Dataset v0.4 published 2026-11-23:</strong> 3,280 validated pairs (train 2,956 / val 162 / test 162) at <a href="https://huggingface.co/datasets/aag1091/netconfig-slm-dataset">huggingface.co/datasets/aag1091/netconfig-slm-dataset</a>. <strong>QLoRA smoke train completed 2026-11-23:</strong> train loss 0.379; fine-tuned coverage 0.983 vs base 0.706 on the held-out test split, but the raw generations do not stop after one config (Batfish 0/60 raw, 60/60 for the first configs alone; intent-match 33/60 raw). Ahead: the final growth wave to the full ~5,000-pair v0, then a retrain with the stopping fix — the model publishes only if its raw output clears the set bar: Batfish ≥95% and intent-match ≥90%.</p>
+<p class="note">Status: v0 scope locked on 2026-11-22 (6 families, ~5,000 validated pairs, Qwen3-4B fine-tune first). <strong>Dataset v1.0 published 2026-11-23 — the Cisco v0 dataset is complete:</strong> 5,000 validated pairs (train 4,496 / val 252 / test 252) at <a href="https://huggingface.co/datasets/aag1091/netconfig-slm-dataset">huggingface.co/datasets/aag1091/netconfig-slm-dataset</a>; Cisco dataset growth stops here. <strong>QLoRA smoke train completed 2026-11-23:</strong> train loss 0.379; fine-tuned coverage 0.983 vs base 0.706 on the held-out test split, but the raw generations do not stop after one config (Batfish 0/60 raw, 60/60 for the first configs alone; intent-match 33/60 raw). Ahead: the full QLoRA retrain on v1.0 with the stopping fix launches next — the model publishes only if its raw output clears the set bar: Batfish ≥95% and intent-match ≥90%.</p>
 
 <p class="note">Every dataset example must pass two rungs before it counts: a syntax parse, then Batfish semantic validation. Background: <a href="https://avinashgosavi.com/post/building-a-purpose-built-small-model-the-prework/">Building a purpose-built small model: the prework</a>.</p>
 </body>
