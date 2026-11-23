@@ -67,7 +67,7 @@
   <tr><td>580</td><td>~5,000 pairs</td><td>VLAN/L2 · trunk/SVI · static routing · OSPF · BGP · interface/mgmt</td></tr>
 </table>
 
-<p class="note">Status: v0 scope locked on 2026-11-22 (6 families, ~5,000 validated pairs, Qwen3-4B fine-tune first). The first dataset milestone is reached: 580 validated pairs. Now assembling v0.1 (splits + dataset card) for the first Hugging Face publish, then the Qwen3-4B smoke train.</p>
+<p class="note">Status: v0 scope locked on 2026-11-22 (6 families, ~5,000 validated pairs, Qwen3-4B fine-tune first). <strong>Dataset v0.1 published 2026-11-23:</strong> 580 validated pairs (train 520 / val 30 / test 30) at <a href="https://huggingface.co/datasets/aag1091/netconfig-slm-dataset">huggingface.co/datasets/aag1091/netconfig-slm-dataset</a>. Next: the Qwen3-4B QLoRA smoke train on v0.1, then growing the dataset toward the full ~5,000-pair v0.</p>
 
 <p class="note">Every dataset example must pass two rungs before it counts: a syntax parse, then Batfish semantic validation. Background: <a href="https://avinashgosavi.com/post/building-a-purpose-built-small-model-the-prework/">Building a purpose-built small model: the prework</a>.</p>
 </body>
