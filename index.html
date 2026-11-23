@@ -25,6 +25,20 @@
 <table>
   <tr><th>Date</th><th>Run</th><th>Examples</th><th>Parse (ciscoconfparse2)</th><th>Batfish</th></tr>
   <tr>
+    <td>2026-11-23</td>
+    <td>Dataset v0.2 assembled + published — 1,180 pairs (fixed v0.1 corpus + batch 4); validation-round fixes applied (32 invented VLAN name lines removed, 2 BGP aggregate prefixes canonicalised, glued-<code>!</code> separators normalised); all 61 changed rows re-validated and the full corpus re-checked for intent match (1,180 / 1,180)</td>
+    <td>1,180</td>
+    <td class="pass">1,180 / 1,180 pass</td>
+    <td class="pass">1,180 / 1,180 pass (CISCO_IOS, 0 init issues)</td>
+  </tr>
+  <tr>
+    <td>2026-11-23</td>
+    <td>Batch 4 generation — 600 new pairs (100 per family), harder multi-part requests; generator intent-match self-check gate before validation</td>
+    <td>600</td>
+    <td class="pass">600 / 600 pass</td>
+    <td class="pass">600 / 600 pass (CISCO_IOS, 0 init issues)</td>
+  </tr>
+  <tr>
     <td>2026-11-22</td>
     <td>Batch 3 generation — 160 new BGP + interface/mgmt pairs (80 each), clean on the first validation run; risky constructs (BGP filter-lists, ip default-gateway) probed and excluded up front</td>
     <td>160</td>
@@ -64,10 +78,10 @@
 <h2>Totals</h2>
 <table>
   <tr><th>Validated examples</th><th>v0 target</th><th>Families</th></tr>
-  <tr><td>580</td><td>~5,000 pairs</td><td>VLAN/L2 · trunk/SVI · static routing · OSPF · BGP · interface/mgmt</td></tr>
+  <tr><td>1,180</td><td>~5,000 pairs</td><td>VLAN/L2 · trunk/SVI · static routing · OSPF · BGP · interface/mgmt</td></tr>
 </table>
 
-<p class="note">Status: v0 scope locked on 2026-11-22 (6 families, ~5,000 validated pairs, Qwen3-4B fine-tune first). <strong>Dataset v0.1 published 2026-11-23:</strong> 580 validated pairs (train 520 / val 30 / test 30) at <a href="https://huggingface.co/datasets/aag1091/netconfig-slm-dataset">huggingface.co/datasets/aag1091/netconfig-slm-dataset</a>. Next: the Qwen3-4B QLoRA smoke train on v0.1, then growing the dataset toward the full ~5,000-pair v0.</p>
+<p class="note">Status: v0 scope locked on 2026-11-22 (6 families, ~5,000 validated pairs, Qwen3-4B fine-tune first). <strong>Dataset v0.2 published 2026-11-23:</strong> 1,180 validated pairs (train 1,060 / val 60 / test 60) at <a href="https://huggingface.co/datasets/aag1091/netconfig-slm-dataset">huggingface.co/datasets/aag1091/netconfig-slm-dataset</a>. The Qwen3-4B QLoRA smoke train is in progress; dataset growth toward the full ~5,000-pair v0 continues.</p>
 
 <p class="note">Every dataset example must pass two rungs before it counts: a syntax parse, then Batfish semantic validation. Background: <a href="https://avinashgosavi.com/post/building-a-purpose-built-small-model-the-prework/">Building a purpose-built small model: the prework</a>.</p>
 </body>
