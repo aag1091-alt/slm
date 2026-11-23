@@ -26,6 +26,20 @@
   <tr><th>Date</th><th>Run</th><th>Examples</th><th>Parse (ciscoconfparse2)</th><th>Batfish</th></tr>
   <tr>
     <td>2026-11-23</td>
+    <td>Dataset v0.4 assembled + published — 3,280 pairs (v0.3 corpus + batch 6), stratified splits train 2,956 / val 162 / test 162; integrity clean (unique IDs, no duplicate pairs, secret scrub clean); full-corpus intent-match audit triaged — all 126 flagged rows are documented checker extraction limits, independently re-verified pair-by-pair (1,062 VLAN port pairs + 78 trunks), zero real mismatches</td>
+    <td>3,280</td>
+    <td class="pass">3,280 / 3,280 pass</td>
+    <td class="pass">3,280 / 3,280 pass (CISCO_IOS, 0 init issues)</td>
+  </tr>
+  <tr>
+    <td>2026-11-23</td>
+    <td>Batch 6 generation — 1,200 new pairs (200 per family); ~22% of intents wrapped in ticket / ops-note framing ("Change request:", "Ops note:", "Ticket:", "Work order:"), new head/frame styles and larger multi-part requests (up to 6 VLANs, 4 SVIs, 8 static routes); no new CLI constructs; generator intent-match gate mutation-tested (16/16 planted errors caught), dedupe rejected 18 candidates</td>
+    <td>1,200</td>
+    <td class="pass">1,200 / 1,200 pass</td>
+    <td class="pass">1,200 / 1,200 pass (CISCO_IOS, 0 init issues)</td>
+  </tr>
+  <tr>
+    <td>2026-11-23</td>
     <td>QLoRA smoke train eval — first Qwen3-4B fine-tune (HF Jobs, train loss 0.379, ~73 min, ~$1.84) scored on the 60-row held-out test split it actually fetched (dataset v0.2). In-job: base model key-token coverage 0.706 → fine-tuned 0.983 (BGP weakest at 0.90). Home ladder on the raw generations: intent-match 33/60 — every generation fails to stop and continues with hallucinated extra turns, so Batfish rejects all 60 raw outputs; the first config of each generation, taken alone, passes Batfish 60/60 and every non-hostname intent check in 59/60 (hostname wrong in 15/60). Fix stopping + hostname fidelity before any model publish.</td>
     <td>60</td>
     <td class="pass">60 / 60 pass</td>
@@ -99,10 +113,10 @@
 <h2>Totals</h2>
 <table>
   <tr><th>Validated examples</th><th>v0 target</th><th>Families</th></tr>
-  <tr><td>2,080</td><td>~5,000 pairs</td><td>VLAN/L2 · trunk/SVI · static routing · OSPF · BGP · interface/mgmt</td></tr>
+  <tr><td>3,280</td><td>~5,000 pairs</td><td>VLAN/L2 · trunk/SVI · static routing · OSPF · BGP · interface/mgmt</td></tr>
 </table>
 
-<p class="note">Status: v0 scope locked on 2026-11-22 (6 families, ~5,000 validated pairs, Qwen3-4B fine-tune first). <strong>Dataset v0.3 published 2026-11-23:</strong> 2,080 validated pairs (train 1,876 / val 102 / test 102) at <a href="https://huggingface.co/datasets/aag1091/netconfig-slm-dataset">huggingface.co/datasets/aag1091/netconfig-slm-dataset</a>. <strong>QLoRA smoke train completed 2026-11-23:</strong> train loss 0.379; fine-tuned coverage 0.983 vs base 0.706 on the held-out test split, but the raw generations do not stop after one config (Batfish 0/60 raw, 60/60 for the first configs alone; intent-match 33/60 raw) — no model publish until stopping and hostname fidelity are fixed and the ladder is re-run. Dataset growth toward the full ~5,000-pair v0 continues.</p>
+<p class="note">Status: v0 scope locked on 2026-11-22 (6 families, ~5,000 validated pairs, Qwen3-4B fine-tune first). <strong>Dataset v0.4 published 2026-11-23:</strong> 3,280 validated pairs (train 2,956 / val 162 / test 162) at <a href="https://huggingface.co/datasets/aag1091/netconfig-slm-dataset">huggingface.co/datasets/aag1091/netconfig-slm-dataset</a>. <strong>QLoRA smoke train completed 2026-11-23:</strong> train loss 0.379; fine-tuned coverage 0.983 vs base 0.706 on the held-out test split, but the raw generations do not stop after one config (Batfish 0/60 raw, 60/60 for the first configs alone; intent-match 33/60 raw). Ahead: the final growth wave to the full ~5,000-pair v0, then a retrain with the stopping fix — the model publishes only if its raw output clears the set bar: Batfish ≥95% and intent-match ≥90%.</p>
 
 <p class="note">Every dataset example must pass two rungs before it counts: a syntax parse, then Batfish semantic validation. Background: <a href="https://avinashgosavi.com/post/building-a-purpose-built-small-model-the-prework/">Building a purpose-built small model: the prework</a>.</p>
 </body>
