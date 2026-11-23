@@ -26,6 +26,13 @@
   <tr><th>Date</th><th>Run</th><th>Examples</th><th>Parse (ciscoconfparse2)</th><th>Batfish</th></tr>
   <tr>
     <td>2026-11-22</td>
+    <td>Batch 2 generation — 160 new static routing + OSPF pairs (80 each); 3 OSPF rows fixed with explicit router-ids after the first validation pass</td>
+    <td>160</td>
+    <td class="pass">160 / 160 pass</td>
+    <td class="pass">160 / 160 pass (CISCO_IOS, 0 init issues)</td>
+  </tr>
+  <tr>
+    <td>2026-11-22</td>
     <td>Batch 1 generation — 160 new VLAN/L2 + trunk/SVI pairs (80 each), uniqueness-checked against the seeds and within the batch</td>
     <td>160</td>
     <td class="pass">160 / 160 pass</td>
@@ -50,10 +57,10 @@
 <h2>Totals</h2>
 <table>
   <tr><th>Validated examples</th><th>v0 target</th><th>Families</th></tr>
-  <tr><td>260</td><td>~5,000 pairs</td><td>VLAN/L2 · trunk/SVI · static routing · OSPF · BGP · interface/mgmt</td></tr>
+  <tr><td>420</td><td>~5,000 pairs</td><td>VLAN/L2 · trunk/SVI · static routing · OSPF · BGP · interface/mgmt</td></tr>
 </table>
 
-<p class="note">Status: v0 scope locked on 2026-11-22 (6 families, ~5,000 validated pairs, Qwen3-4B fine-tune first). Data generation is running family by family toward the first ~500-pair dataset (v0.1, for Hugging Face): 260 of ~500 done.</p>
+<p class="note">Status: v0 scope locked on 2026-11-22 (6 families, ~5,000 validated pairs, Qwen3-4B fine-tune first). Data generation is running family by family toward the first ~500-pair dataset (v0.1, for Hugging Face): 420 of ~500 done.</p>
 
 <p class="note">Every dataset example must pass two rungs before it counts: a syntax parse, then Batfish semantic validation. Background: <a href="https://avinashgosavi.com/post/building-a-purpose-built-small-model-the-prework/">Building a purpose-built small model: the prework</a>.</p>
 </body>
