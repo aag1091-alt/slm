@@ -25,6 +25,13 @@
 <table>
   <tr><th>Date</th><th>Run</th><th>Examples</th><th>Parse (ciscoconfparse2)</th><th>Batfish</th></tr>
   <tr>
+    <td>2026-11-25</td>
+    <td><strong>Model published</strong> — Run 3, a full-parameter fine-tune of Qwen3-4B-Base on dataset v1.0 (4,496 train rows, train loss 0.0254, $3.19 on HF Jobs), cleared the publish bar on the held-out test split and is live at <a href="https://huggingface.co/aag1091/netconfig-slm-qwen3-4b">huggingface.co/aag1091/netconfig-slm-qwen3-4b</a>, including a Q4_K_M GGUF build for llama.cpp / Ollama. Raw generations: intent-match 86.9% raw / 92.5% after triage of known checker extraction limits; clean-stop rate 94.8% — full fine-tuning fixed the EOS stopping failure diagnosed after the QLoRA run (0.0% clean stops)</td>
+    <td>252</td>
+    <td class="pass">252 / 252 pass</td>
+    <td class="pass">249 / 252 pass (98.8%)</td>
+  </tr>
+  <tr>
     <td>2026-11-23</td>
     <td>Dataset v1.0 assembled + published — the complete Cisco v0 dataset: 5,000 pairs (v0.4 corpus + batch 7), fulfilling the scope locked on 2026-11-22 (6 families, ~5,000 validated pairs) at exactly 5,000; stratified splits train 4,496 / val 252 / test 252; integrity clean (unique IDs, no duplicate pairs, secret scrub clean); full-corpus intent-match audit triaged — all 242 flagged rows are documented checker extraction limits, independently re-verified pair-by-pair (1,922 VLAN port pairs + 179 trunks), zero real mismatches</td>
     <td>5,000</td>
@@ -131,6 +138,8 @@
 </table>
 
 <p class="note">Status: v0 scope locked on 2026-11-22 (6 families, ~5,000 validated pairs, Qwen3-4B fine-tune first). <strong>Dataset v1.0 published 2026-11-23 — the Cisco v0 dataset is complete:</strong> 5,000 validated pairs (train 4,496 / val 252 / test 252) at <a href="https://huggingface.co/datasets/aag1091/netconfig-slm-dataset">huggingface.co/datasets/aag1091/netconfig-slm-dataset</a>; Cisco dataset growth stops here. <strong>QLoRA smoke train completed 2026-11-23:</strong> train loss 0.379; fine-tuned coverage 0.983 vs base 0.706 on the held-out test split, but the raw generations do not stop after one config (Batfish 0/60 raw, 60/60 for the first configs alone; intent-match 33/60 raw). <strong>Full QLoRA retrain on v1.0 completed 2026-11-23:</strong> train loss 0.045; fine-tuned coverage 0.986 vs base 0.699 — but stopped_cleanly 0.0%, so the stopping fix did not take effect in generation. Raw generations scored at home: parse 100%, Batfish 7/252 (2.8%), intent-match 73.4% raw / 78.6% triaged. <strong>Publish bar missed on both counts (Batfish ≥95%, intent-match ≥90%) — nothing published.</strong> A Q4_K_M GGUF of the merged model was built for manual testing, with a held-out test pack. Next: diagnose why the EOS fix failed before any retrain.</p>
+
+<p class="note"><strong>Update 2026-11-25 — publish bar cleared, v0 model published.</strong> The stopping failure was diagnosed to the frozen, tied lm_head/embedding row for the EOS token under QLoRA (the EOS position received no effective gradient); a sub-$1 probe loop exhausted the LoRA-family fixes, and a full-parameter fine-tune (Run 3) fixed stopping as diagnosed: 94.8% clean stops, parse 100%, Batfish 98.8%, intent-match 92.5% triaged on the held-out test split — both legs of the bar (Batfish ≥95%, intent-match ≥90%) cleared. The model is public at <a href="https://huggingface.co/aag1091/netconfig-slm-qwen3-4b">huggingface.co/aag1091/netconfig-slm-qwen3-4b</a> with its full evaluation card and a Q4_K_M GGUF build.</p>
 
 <p class="note">Every dataset example must pass two rungs before it counts: a syntax parse, then Batfish semantic validation. Background: <a href="https://avinashgosavi.com/post/building-a-purpose-built-small-model-the-prework/">Building a purpose-built small model: the prework</a>.</p>
 </body>
